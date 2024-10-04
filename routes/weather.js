@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
                 message: 'The current temperature at the location with longitude ' + longitude + ' and latitude ' + latitude + ' is ' + currentTemperature + '°C'
             });
         } else {
-            return res.status(500).json({ error: 'Failed to retrieve weather data from API' });
+            return res.status(500).json({ error: 'Failed to retrieve weather data from API. ' + weatherData.reason });
         }
     } catch (error) {
         return res.status(500).json({ error: 'Error occurred while fetching weather data' });

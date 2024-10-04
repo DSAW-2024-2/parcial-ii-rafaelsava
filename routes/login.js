@@ -23,9 +23,9 @@ router.post('/', (req, res) => {
 function authToken(req,res,next){
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
-    if (!token) return res.sendStatus(401);
+    if (!token) return res.status(401).json({message: 'Token is required. Go to /login to get one.'});
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403);
+        if (err) return res.status(403).json({message: 'Invalid token. Go to /login to get a new one.'});
         req.user = user;
         next();
     });
